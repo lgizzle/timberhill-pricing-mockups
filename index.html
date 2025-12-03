@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timberhill Pricing Page Mockups</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+        .header {
+            background: #2e7d32;
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        .header .tagline {
+            font-size: 22px;
+            font-style: italic;
+            opacity: 0.95;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Intro Content Section */
+        .intro-content {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .intro-content p {
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        .intro-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Two Column Layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .info-box {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .info-box h3 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+            font-size: 20px;
+            border-bottom: 2px solid #2e7d32;
+            padding-bottom: 10px;
+        }
+        .info-box p {
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+        .info-box p:last-child {
+            margin-bottom: 0;
+        }
+        .info-box h4 {
+            color: #333;
+            margin: 20px 0 10px;
+            font-size: 16px;
+        }
+        .contact-link {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .contact-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Mockup Review Section */
+        .mockup-section {
+            background: #e8f5e9;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        .mockup-section h2 {
+            color: #2e7d32;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        .mockup-section .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+        .option-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .option-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        .option-card.recommended {
+            border: 3px solid #2e7d32;
+        }
+        .option-card.recommended .card-header {
+            background: #2e7d32;
+        }
+        .card-header {
+            background: #4a4a4a;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .card-header h3 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        .card-header .card-subtitle {
+            opacity: 0.8;
+            font-size: 14px;
+        }
+        .recommended-badge {
+            background: #fff3cd;
+            color: #856404;
+            padding: 5px 15px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .card-body p {
+            margin-bottom: 15px;
+            color: #666;
+            font-size: 14px;
+        }
+        .pros-list {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        .pros-list li {
+            padding: 6px 0;
+            padding-left: 22px;
+            position: relative;
+            font-size: 13px;
+        }
+        .pros-list li:before {
+            content: "✓";
+            color: #2e7d32;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        .btn-primary {
+            background: #2e7d32;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #1b5e20;
+        }
+        .btn-outline {
+            background: white;
+            color: #2e7d32;
+            border: 2px solid #2e7d32;
+        }
+        .btn-outline:hover {
+            background: #2e7d32;
+            color: white;
+        }
+
+        /* Staff Note */
+        .staff-note {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        .staff-note strong {
+            color: #856404;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        @media (max-width: 900px) {
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 28px;
+            }
+            .intro-content, .info-box, .mockup-section {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Join Timberhill Athletic Club Today...</h1>
+        <p class="tagline">Your Health is Your Wealth!</p>
+    </div>
+
+    <div class="container">
+        <!-- Staff Review Note -->
+        <div class="staff-note">
+            <strong>STAFF REVIEW:</strong> Please review all three pricing page design options below and let us know which approach you prefer!
+        </div>
+
+        <!-- Main Intro Content -->
+        <div class="intro-content">
+            <p>At Timberhill Athletic Club, we treat our members like family. We greet you by name when you walk in the door and take the time to get to know you and your goals. Our goal is see you succeed with us, no matter your needs. We care about you and your family, and offer a variety of membership options to fit your needs.</p>
+
+            <p>You are sure to find something for everyone with indoor and outdoor pools, a full-size basketball court, racquetball courts, a large cardio floor, free weights, group exercise classes, indoor cycling, personal training, kids playroom, and massage therapy.</p>
+
+            <p>We have taken a comprehensive approach to fitness to provide you the tools you need to reach your goals; whether losing weight, staying active, or enjoying fitness with friends and family. We also understand that it can be a bit daunting, so we take the time to understand you and your goals, to provide you with the help you need.</p>
+
+            <p>At Timberhill Athletic Club we care about you. Come in for a tour today and see for yourself what makes Timberhill Athletic Club a family-friendly, unique health club in Corvallis.</p>
+        </div>
+
+        <!-- Two Column Info Boxes -->
+        <div class="two-col">
+            <div class="info-box">
+                <h3>Available Discounts</h3>
+                <p>Corporate and insurance discounts are available for our joining fees. We also offer discounts for members age 65 and older and members of the military.</p>
+                <p>Contact one of our membership service representatives with any questions you may have or stop by to tour our facility.</p>
+            </div>
+
+            <div class="info-box">
+                <h3>Automatic Monthly Billing</h3>
+                <p>The monthly dues rate is based on electronic funds transfer from your credit or debit card which we transmit on the 15th of each month.</p>
+            </div>
+        </div>
+
+        <!-- Billing & Membership Policies -->
+        <div class="info-box" style="margin-bottom: 40px;">
+            <h3>Billing & Membership Policies</h3>
+
+            <h4>Late Fees</h4>
+            <p>Payment for monthly membership dues must be made by the 15th of each month. A late fee of $10 will be added to your account for past due balances.</p>
+            <p>Consider auto-pay on your member account to avoid any potential late fees.</p>
+
+            <h4>Changes to Membership</h4>
+            <p>Any changes to your membership, including inactive status and addition or subtraction of members on your account, will take effect the following month. Additionally, if you choose have your membership transition to inactive, please note there is a one-month minimum requirement.</p>
+            <p><em>*Please note that all membership types are non-refundable</em></p>
+
+            <p style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #eee;">
+                <strong>Questions about the updated policies?</strong><br>
+                Contact Beth in the Business Office: 541-757-8559 or <a href="mailto:beth@timberhillsports.com" class="contact-link">beth@timberhillsports.com</a>
+            </p>
+        </div>
+
+        <!-- Mockup Options Section -->
+        <div class="mockup-section">
+            <h2>Pricing Page Design Options</h2>
+            <p class="subtitle">Click each option to view the full mockup, then use your browser's back button to return here</p>
+
+            <div class="options-grid">
+                <!-- Option A -->
+                <div class="option-card">
+                    <div class="card-header">
+                        <h3>Option A</h3>
+                        <div class="card-subtitle">Pricing Cards</div>
+                    </div>
+                    <div class="card-body">
+                        <p>Modern card layout with each membership as a distinct visual unit.</p>
+                        <ul class="pros-list">
+                            <li>Modern, clean SaaS-style look</li>
+                            <li>Easy to scan and compare</li>
+                            <li>Cards stack nicely on mobile</li>
+                            <li>Each membership clearly separated</li>
+                        </ul>
+                        <a href="option-a-pricing-cards.html" class="btn btn-outline">View Option A</a>
+                    </div>
+                </div>
+
+                <!-- Option B -->
+                <div class="option-card">
+                    <div class="card-header">
+                        <h3>Option B</h3>
+                        <div class="card-subtitle">Comparison Table</div>
+                    </div>
+                    <div class="card-body">
+                        <p>Tab-based selector with full side-by-side comparison grid.</p>
+                        <ul class="pros-list">
+                            <li>Best for detailed comparison</li>
+                            <li>All features visible at once</li>
+                            <li>Interactive tab switching</li>
+                            <li>Clear visual hierarchy</li>
+                        </ul>
+                        <a href="option-b-comparison-table.html" class="btn btn-outline">View Option B</a>
+                    </div>
+                </div>
+
+                <!-- Option C -->
+                <div class="option-card recommended">
+                    <div class="recommended-badge">Recommended</div>
+                    <div class="card-header">
+                        <h3>Option C</h3>
+                        <div class="card-subtitle">Enhanced List View</div>
+                    </div>
+                    <div class="card-body">
+                        <p>Expandable accordion layout with pricing in headers.</p>
+                        <ul class="pros-list">
+                            <li>Most mobile-friendly design</li>
+                            <li>Familiar structure</li>
+                            <li>Shows prices immediately</li>
+                            <li>Easiest Divi implementation</li>
+                        </ul>
+                        <a href="option-c-enhanced-list.html" class="btn btn-primary">View Option C</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Timberhill Athletic Club - Pricing Page Mockups - December 2024</p>
+    </div>
+</body>
+</html>

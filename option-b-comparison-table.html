@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Option B: Comparison Table - Timberhill Athletic Club</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .back-nav {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: #2e7d32;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+        }
+        .back-btn:hover {
+            background: #1b5e20;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+        body {
+            font-family: 'Open Sans', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
+        .header-bar {
+            background: #2d2d2d;
+            color: white;
+            padding: 10px 20px;
+            font-size: 14px;
+            text-align: center;
+        }
+        .page-header {
+            background: #2e7d32;
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .page-header h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+        .page-header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Tier Tabs */
+        .tier-selector {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .tier-tab {
+            padding: 12px 30px;
+            background: #f0f0f0;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .tier-tab:hover {
+            background: #e0e0e0;
+        }
+        .tier-tab.active {
+            background: #2e7d32;
+            color: white;
+            border-color: #2e7d32;
+        }
+
+        /* Comparison Table */
+        .table-wrapper {
+            overflow-x: auto;
+            margin-bottom: 40px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+        .comparison-table thead {
+            background: #f5f5f5;
+        }
+        .comparison-table th {
+            padding: 20px 15px;
+            text-align: center;
+            font-size: 16px;
+            border-bottom: 2px solid #2e7d32;
+        }
+        .comparison-table th:first-child {
+            text-align: left;
+            width: 180px;
+        }
+        .comparison-table th.featured {
+            background: #2e7d32;
+            color: white;
+        }
+        .comparison-table td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        .comparison-table td:first-child {
+            text-align: left;
+            font-weight: 500;
+        }
+        .comparison-table tr:hover {
+            background: #f9f9f9;
+        }
+
+        /* Price Rows */
+        .comparison-table .price-row td {
+            padding: 20px 15px;
+            background: #f8f8f8;
+        }
+        .comparison-table .price-row .price {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+        .comparison-table .price-row .price span {
+            font-size: 14px;
+            font-weight: normal;
+            color: #666;
+        }
+        .comparison-table .price-row td:first-child {
+            font-size: 14px;
+            color: #666;
+        }
+        .comparison-table .joining-row td {
+            font-size: 14px;
+            color: #666;
+            padding: 10px 15px;
+            border-bottom: 2px solid #eee;
+        }
+        .comparison-table .senior-row td {
+            font-size: 13px;
+            color: #888;
+            padding: 8px 15px;
+            background: #fafafa;
+        }
+        .check {
+            color: #2e7d32;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .dash {
+            color: #ccc;
+            font-size: 20px;
+        }
+        .extra-fee {
+            font-size: 12px;
+            color: #666;
+        }
+        .comparison-table .cta-row td {
+            padding: 20px 15px;
+            background: #f8f8f8;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        .btn-primary {
+            background: #2e7d32;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #1b5e20;
+        }
+        .btn-outline {
+            background: white;
+            color: #2e7d32;
+            border: 2px solid #2e7d32;
+        }
+        .btn-outline:hover {
+            background: #2e7d32;
+            color: white;
+        }
+
+        /* Specialty Section */
+        .specialty-section {
+            background: #f5f5f5;
+            padding: 40px;
+            border-radius: 10px;
+            margin: 40px 0;
+        }
+        .specialty-section h2 {
+            color: #2e7d32;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .specialty-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .specialty-item {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+        }
+        .specialty-item h4 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+        .specialty-item .price {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            margin: 10px 0;
+        }
+        .specialty-item .price span {
+            font-size: 14px;
+            font-weight: normal;
+            color: #666;
+        }
+        .specialty-item p {
+            font-size: 14px;
+            color: #666;
+        }
+        .specialty-item .details {
+            font-size: 13px;
+            color: #888;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+        }
+
+        /* Info Boxes */
+        .info-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        .info-box {
+            background: #f8f8f8;
+            padding: 30px;
+            border-radius: 10px;
+            border-left: 4px solid #2e7d32;
+        }
+        .info-box h3 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        .info-box ul {
+            list-style: none;
+        }
+        .info-box li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .info-box li:last-child {
+            border-bottom: none;
+        }
+
+        /* CTA */
+        .cta-section {
+            background: #2e7d32;
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+            border-radius: 10px;
+            margin-top: 40px;
+        }
+        .cta-section h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+        .cta-section p {
+            margin-bottom: 25px;
+        }
+        .cta-section .btn {
+            background: white;
+            color: #2e7d32;
+            padding: 15px 40px;
+        }
+        .cta-section .btn:hover {
+            background: #f5f5f5;
+        }
+
+        /* Note */
+        .mockup-note {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 0;
+            text-align: center;
+        }
+
+        /* Tier Content */
+        .tier-content {
+            display: none;
+        }
+        .tier-content.active {
+            display: block;
+        }
+        .table-footnote {
+            font-size: 13px;
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+            padding: 0 10px;
+        }
+        .daytime-row td {
+            color: #2e7d32;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 28px;
+            }
+            .comparison-table th, .comparison-table td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            .comparison-table .price-row .price {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="back-nav">
+        <a href="index.html" class="back-btn">← Back to Options</a>
+    </div>
+    <div class="mockup-note">
+        <strong>MOCKUP - Option B: Comparison Table</strong><br>
+        Side-by-side comparison with tier selector. Achievable in Divi using Table module or custom HTML/CSS.
+    </div>
+
+    <div class="header-bar">
+        541-757-8559 | kyle@timberhillsports.com | Mon-Fri 5AM-10PM, Sat-Sun 7AM-7PM
+    </div>
+
+    <div class="page-header">
+        <h1>Membership Options</h1>
+        <p>Compare our memberships and find the perfect fit for your lifestyle</p>
+    </div>
+
+    <div class="container">
+        <!-- Tier Selector -->
+        <div class="tier-selector">
+            <div class="tier-tab active" onclick="showTier('single')">Single</div>
+            <div class="tier-tab" onclick="showTier('couple')">Couple</div>
+            <div class="tier-tab" onclick="showTier('family')">Family</div>
+        </div>
+
+        <!-- Single Pricing Table -->
+        <div id="single-content" class="tier-content active">
+            <div class="table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Single Membership</th>
+                            <th class="featured">Full Club</th>
+                            <th>Health Club</th>
+                            <th>Platinum T3</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="price-row">
+                            <td>Monthly Rate</td>
+                            <td><span class="price">$92<span>/mo</span></span></td>
+                            <td><span class="price">$86<span>/mo</span></span></td>
+                            <td><span class="price">$103<span>/mo</span></span></td>
+                        </tr>
+                        <tr class="senior-row">
+                            <td>Senior Rate (65+)</td>
+                            <td>$87/mo</td>
+                            <td>$80/mo</td>
+                            <td><span class="dash">—</span></td>
+                        </tr>
+                        <tr class="joining-row">
+                            <td>Joining Fee</td>
+                            <td>$400</td>
+                            <td>$300</td>
+                            <td>$400</td>
+                        </tr>
+                        <tr class="joining-row daytime-row">
+                            <td>Daytime Joining*</td>
+                            <td>$100</td>
+                            <td>$100</td>
+                            <td><span class="dash">—</span></td>
+                        </tr>
+                        <tr>
+                            <td>Fitness Floor & Equipment</td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Group Exercise Classes</td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Indoor & Outdoor Pools</td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Court Reservations</td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="extra-fee">$7/day</span></td>
+                            <td><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Basketball / Racquetball</td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="extra-fee">$7/day</span></td>
+                            <td><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>G3 Sports & Fitness Access</td>
+                            <td><span class="dash">—</span></td>
+                            <td><span class="dash">—</span></td>
+                            <td><span class="check">✓</span></td>
+                        </tr>
+                        <tr class="cta-row">
+                            <td></td>
+                            <td><a href="/contact-us/" class="btn btn-primary">Join Now</a></td>
+                            <td><a href="/contact-us/" class="btn btn-outline">Join Now</a></td>
+                            <td><a href="/contact-us/" class="btn btn-outline">Join Now</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="table-footnote">*Daytime Access: Weekdays 5AM-4PM + all weekend hours. $7 to stay after 4PM on weekdays.</p>
+        </div>
+
+        <!-- Couple Pricing Table -->
+        <div id="couple-content" class="tier-content">
+            <div class="table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Couple Membership</th>
+                            <th class="featured">Full Club</th>
+                            <th>Health Club</th>
+                            <th>Platinum T3</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="price-row">
+                            <td>Monthly Rate</td>
+                            <td><span class="price">$142<span>/mo</span></span></td>
+                            <td><span class="price">$133<span>/mo</span></span></td>
+                            <td><span class="price">$159<span>/mo</span></span></td>
+                        </tr>
+                        <tr class="senior-row">
+                            <td>Senior Rate (65+)</td>
+                            <td>$134/mo</td>
+                            <td>$124/mo</td>
+                            <td><span class="dash">—</span></td>
+                        </tr>
+                        <tr class="joining-row">
+                            <td>Joining Fee</td>
+                            <td>$450</td>
+                            <td>$350</td>
+                            <td>$450</td>
+                        </tr>
+                        <tr class="joining-row daytime-row">
+                            <td>Daytime Joining*</td>
+                            <td>$150</td>
+                            <td>$150</td>
+                            <td><span class="dash">—</span></td>
+                        </tr>
+                        <tr>
+                            <td>Fitness Floor & Equipment</td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Group Exercise Classes</td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Indoor & Outdoor Pools</td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Court Reservations</td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="extra-fee">$7/day</span></td>
+                            <td><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Basketball / Racquetball</td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="extra-fee">$7/day</span></td>
+                            <td><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>G3 Sports & Fitness Access</td>
+                            <td><span class="dash">—</span></td>
+                            <td><span class="dash">—</span></td>
+                            <td><span class="check">✓</span></td>
+                        </tr>
+                        <tr class="cta-row">
+                            <td></td>
+                            <td><a href="/contact-us/" class="btn btn-primary">Join Now</a></td>
+                            <td><a href="/contact-us/" class="btn btn-outline">Join Now</a></td>
+                            <td><a href="/contact-us/" class="btn btn-outline">Join Now</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="table-footnote">*Daytime Access: Weekdays 5AM-4PM + all weekend hours. $7 to stay after 4PM on weekdays.</p>
+        </div>
+
+        <!-- Family Pricing Table -->
+        <div id="family-content" class="tier-content">
+            <div class="table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Family Membership</th>
+                            <th class="featured">Full Club</th>
+                            <th>Health Club</th>
+                            <th>Platinum T3</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="price-row">
+                            <td>Monthly Rate</td>
+                            <td><span class="price">$190<span>/mo</span></span></td>
+                            <td><span class="price">$178<span>/mo</span></span></td>
+                            <td><span class="price">$212<span>/mo</span></span></td>
+                        </tr>
+                        <tr class="senior-row">
+                            <td>Senior Rate (65+)</td>
+                            <td>$181/mo</td>
+                            <td>$169/mo</td>
+                            <td><span class="dash">—</span></td>
+                        </tr>
+                        <tr class="joining-row">
+                            <td>Joining Fee</td>
+                            <td>$500</td>
+                            <td>$400</td>
+                            <td>$500</td>
+                        </tr>
+                        <tr class="joining-row daytime-row">
+                            <td>Daytime Joining*</td>
+                            <td>$200</td>
+                            <td>$200</td>
+                            <td><span class="dash">—</span></td>
+                        </tr>
+                        <tr>
+                            <td>Fitness Floor & Equipment</td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Group Exercise Classes</td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Indoor & Outdoor Pools</td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Court Reservations</td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="extra-fee">$7/day</span></td>
+                            <td><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Basketball / Racquetball</td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="extra-fee">$7/day</span></td>
+                            <td><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>G3 Sports & Fitness Access</td>
+                            <td><span class="dash">—</span></td>
+                            <td><span class="dash">—</span></td>
+                            <td><span class="check">✓</span></td>
+                        </tr>
+                        <tr class="cta-row">
+                            <td></td>
+                            <td><a href="/contact-us/" class="btn btn-primary">Join Now</a></td>
+                            <td><a href="/contact-us/" class="btn btn-outline">Join Now</a></td>
+                            <td><a href="/contact-us/" class="btn btn-outline">Join Now</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="table-footnote">*Daytime Access: Weekdays 5AM-4PM + all weekend hours. $7 to stay after 4PM on weekdays.</p>
+        </div>
+
+        <!-- Specialty Memberships -->
+        <div class="specialty-section">
+            <h2>Specialty Memberships</h2>
+            <div class="specialty-grid">
+                <div class="specialty-item">
+                    <h4>Student Membership</h4>
+                    <div class="price">$102<span>/month</span></div>
+                    <p>Full facility access for full-time students</p>
+                    <div class="details">
+                        No joining fee<br>
+                        Valid student ID required<br>
+                        Two-month minimum
+                    </div>
+                </div>
+                <div class="specialty-item">
+                    <h4>Monthly Therapy</h4>
+                    <div class="price">$96<span>/month</span></div>
+                    <p>Full Club access for rehabilitation</p>
+                    <div class="details">
+                        No joining fee<br>
+                        Requires doctor/PT referral<br>
+                        Four-month maximum
+                    </div>
+                </div>
+                <div class="specialty-item">
+                    <h4>Temporary Membership</h4>
+                    <div class="price">$40-85<span>/week</span></div>
+                    <p>Short-term access for visitors</p>
+                    <div class="details">
+                        No joining fee<br>
+                        Weekly: Single $40 | Couple $62 | Family $85<br>
+                        Monthly: Single $125 | Couple $181 | Family $250<br>
+                        Day Pass: $14
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Boxes -->
+        <div class="info-row">
+            <div class="info-box">
+                <h3>Available Discounts</h3>
+                <ul>
+                    <li><strong>Senior (65+):</strong> Reduced rates on Full & Health Club memberships</li>
+                    <li><strong>Corporate:</strong> Special pricing for local business employees</li>
+                    <li><strong>Military/First Responder:</strong> Thank you discount available</li>
+                </ul>
+            </div>
+            <div class="info-box">
+                <h3>Billing & Policies</h3>
+                <ul>
+                    <li>Automatic monthly billing on the 15th</li>
+                    <li>Credit card or bank draft accepted</li>
+                    <li>$10 late fee for past due balances</li>
+                    <li>One-month minimum for membership changes</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-section">
+            <h2>Questions? Let's Talk.</h2>
+            <p>Schedule a tour and we'll help you find the membership that fits your needs and budget.</p>
+            <a href="/contact-us/" class="btn">Schedule a Tour</a>
+        </div>
+    </div>
+
+    <script>
+        function showTier(tier) {
+            // Hide all content
+            document.querySelectorAll('.tier-content').forEach(el => el.classList.remove('active'));
+            // Show selected content
+            document.getElementById(tier + '-content').classList.add('active');
+            // Update tabs
+            document.querySelectorAll('.tier-tab').forEach(el => el.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
